@@ -1,0 +1,21 @@
+{
+  "name": "@tylerbu/mrm",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tyler Butler <tyler@tylerbutler.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "sort-package-json": "^1.55.0",
+    "xo": "^0.48.0"
+  },
+  "xo": {
+    "space": true
+  },
+  "dependencies": {
+    "mrm-core": "^7.0.0"
+  }
+}
