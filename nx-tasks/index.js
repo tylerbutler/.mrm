@@ -6,7 +6,7 @@ import { globby, globbyStream } from 'globby';
 
 const { json, lines, packageJson } = mrm;
 
-const FLUID_ROOT = 'C:\\code\\FluidFramework';
+const FLUID_ROOT = process.env._FLUID_ROOT_ ? process.env._FLUID_ROOT_ : 'C:\\code\\FluidFramework';
 const STARTING_PATH = process.cwd();
 
 (async () => {
@@ -19,12 +19,11 @@ const STARTING_PATH = process.cwd();
     const relPath = path.relative(FLUID_ROOT, absPath).split(path.sep).join(path.posix.sep);
     console.log(relPath);
 
-    const pkgName = json(path.join(absPath, 'package.json')).get('name');
+    const pkgJson = json(path.join(absPath, 'package.json'));
 
-    // if (json(path.join(absPath, 'package.json')).exists()) {
-    // }
-    // packageJson()
-    const isPrivate = json(path.join(absPath, 'package.json')).get('private');
+    const pkgName = pkgJson.get('name');
+    const isPrivate = pkgJson.get('private');
+
     if (!isPrivate) {
       let tags = [];
       if (absPath.includes('common')) {
@@ -37,7 +36,7 @@ const STARTING_PATH = process.cwd();
         tags = ['scope:client'];
       }
 
-      json(path.join(absPath, 'package.json'))
+      pkgJson
         .set('nx.tags', tags)
         .save();
 
